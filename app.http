@@ -1,0 +1,9 @@
+
+
+GET http://localhost:3000/CheckUser
+Content-Type: application/json
+
+{
+    "username":"jaswanth",
+    "password":"jaswanth"
+}

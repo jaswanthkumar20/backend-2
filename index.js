@@ -32,20 +32,20 @@ initializeDBAndServer();
 
 app.post("/CheckUser", async (request, response) => {
   const { username, password } = request.body;
-  const row = await db.all(
-    `select * from user where username='${username}' and password='${password}';`,
-    (err, rows) => {
-      if (rows.length > 0) {
-        res.status(200).json(rows);
-      } else {
-        res.status(404).send("No rows found");
-      }
-    }
-  );
-  const length = Object.keys(row).length;
+  const query = `select * from user where username='${username}' and password='${password}';`;
+  const row = await db.all(query);
+  const length = row.length;
   if (length > 0) {
-    response.status(200).json(row);
+    response.send({ status: 200 });
   } else {
-    response.status(404).send({ status: "failure" });
+    response.send({ status: 404 });
   }
 });
+
+app.get("/user", async (request, response) => {
+  const query = `select * from user`;
+  const data = await db.all(query);
+  response.send(data);
+});
+
+// ... (previous code) module.exports = app; // Export the Express app

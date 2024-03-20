@@ -30,14 +30,22 @@ initializeDBAndServer();
 
 //To check weather user exists or not
 
-app.get("/CheckUser", async (request, response) => {
+app.post("/CheckUser", async (request, response) => {
   const { username, password } = request.body;
-  const query = `select * from user where username='${username}';`;
-  const data = await db.all(query);
-  const length = Object.keys(data).length;
+  const row = await db.all(
+    `select * from user where username='${username}' and password='${password}';`,
+    (err, rows) => {
+      if (rows.length > 0) {
+        res.status(200).json(rows);
+      } else {
+        res.status(404).send("No rows found");
+      }
+    }
+  );
+  const length = Object.keys(row).length;
   if (length > 0) {
-    response.send("user exists");
+    response.status(200).json(row);
   } else {
-    response.send("user doesn't exists");
+    response.status(404).send({ status: "failure" });
   }
 });

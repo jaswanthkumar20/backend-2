@@ -1,6 +1,6 @@
 
 
-GET http://localhost:3000/CheckUser
+POST http://localhost:3000/CheckUser
 Content-Type: application/json
 
 {

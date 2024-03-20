@@ -6,5 +6,5 @@ CREATE TABLE user (
 );
 
 
-INSERT INTO user Values (21,"jaswanth","jaswanth");
-Insert into user values (55,"sreya","sreya");
+INSERT INTO user Values (1,"jaswanth","jaswanth");
+Insert into user values (2,"demo","password");
